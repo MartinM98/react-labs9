@@ -11,12 +11,14 @@ const appReducer = (state = initialState, action) => {
     case EMPLOYEES_LOADED: {
       const { employees } = action.payload;
       // CAREFUL: You can't modify state variable directly.
-      return Object.assign({}, state, { employees });
+      return { ...state, employees, alreadyLoaded: true};
     }
     case EMPLOYEE_CREATED: {
       const { employee } = action.payload;
-      // CAREFUL: You can't modify state variable directly.
-      return { ...state, employee };
+      return {
+        ...state,
+        employees: [...state.employees, employee]
+      }
     }
     default:
         return state
