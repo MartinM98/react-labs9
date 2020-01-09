@@ -15,7 +15,7 @@ class PageEmployeeCreate extends React.Component {
 
     this.state = {
       name: '',
-      age: 18,
+      age: '',
       company: '',
       email: '',
       isSaving: false,
@@ -28,7 +28,7 @@ class PageEmployeeCreate extends React.Component {
   }
 
   ageChanged(e) {
-    this.setState({ age: Number(e.target.value) });
+    this.setState({ age: e.target.value });
   }
 
   companyChanged(e) {
