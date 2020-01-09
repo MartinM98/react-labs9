@@ -2,13 +2,17 @@ import {
   EMPLOYEES_LOADED,
   EMPLOYEE_CREATED,
   EMPLOYEE_LOADING,
-  EMPLOYEE_LOADING_ERROR
+  EMPLOYEE_LOADING_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR
 } from "./constants";
 
 export const initialState = {
   employees: [],
   isLoading: false,
-  error: null
+  error: null,
+  user: null,
+  alreadyLoaded:false
 };
 
 // Read this: https://redux.js.org/basics/reducers
@@ -33,6 +37,15 @@ const appReducer = (state = initialState, action) => {
     case EMPLOYEE_LOADING_ERROR: {
       const error = action.payload;
       return { ...state, isLoading: false, error };
+    }
+    case LOGIN_SUCCESS: {
+      const { user } = action.payload;
+      return { ...state, user };
+    }
+    case LOGIN_ERROR: {
+      const { name } = action.payload;
+      alert(`User ${name} not found.`);
+      return { ...state, user: null };
     }
     default:
       return state;
